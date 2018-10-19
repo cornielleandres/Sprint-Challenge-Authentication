@@ -46,7 +46,14 @@ export default class Register extends Component {
 
 		return axios
 			.post('http://localhost:3300/api/register', this.state)
-			.then(res => console.log(res.data))
+			.then(res => {
+				const {
+					username,
+					token,
+				} = res.data;
+				this.props.setUserAndToken(username, token);
+				this.props.goTo('/jokes');
+			})
 			.catch(err => console.log(err));
 	};
 

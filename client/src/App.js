@@ -7,6 +7,7 @@ import {
 	Home,
 	Register,
 	Login,
+	Jokes,
 } from './components/index.js';
 
 // Styles
@@ -19,23 +20,37 @@ const AppDiv = styled.div`
 
 class App extends Component {
 	state = {
+		username: '',
 		token: '',
 	};
 
-	setToken = token => {
-		return this.setState({ token: token });
+	setUserAndToken = (username, token) => {
+		const userInfo = {
+			username: username,
+			token: token,
+		};
+		localStorage.setItem('dadJokes', JSON.stringify(userInfo));
+		return this.setState({ ...userInfo });
 	};
 
+	goTo = path => this.props.history.push(path);
+
 	render() {
+		const {
+			username,
+			token,
+		} = this.state;
 		return (
 			<AppDiv className = 'App'>
 				<Header />
 
 				<Route exact path = '/' component = { Home} />
 
-				<Route path = '/register' render = { () => <Register setToken = { this.setToken } /> } />
+				<Route path = '/register' render = { () => <Register goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
 
-				<Route path = '/login' render = { () => <Login setToken = { this.setToken } /> } />
+				<Route path = '/login' render = { () => <Login goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
+
+				<Route path = '/jokes' render = { () => <Jokes username = { username } token = { token } /> } />
 			</AppDiv>
 		);
 	}
