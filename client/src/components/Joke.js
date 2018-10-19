@@ -13,8 +13,17 @@ const JokeDiv = styled.div`
 		background-color: #444;
 	}
 
+	&:hover .punchline {
+		display: block;
+	}
+
 	p {
 		text-align: left;
+	}
+
+	.punchline {
+		display: none;
+		color: yellow;
 	}
 `;
 
@@ -27,7 +36,7 @@ const Joke = props => {
 	return(
 		<JokeDiv>
 			<p>{ setup }</p>
-			<p>{ punchline }</p>
+			<p className = 'punchline'>{ punchline }</p>
 		</JokeDiv>
 	);
 };
