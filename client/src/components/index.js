@@ -1,3 +1,9 @@
-import Header from './Header.js';
+import Header		from './Header.js';
+import Home			from './Home.js';
+import Register		from './Register.js';
 
-export { Header };
+export {
+	Header,
+	Home,
+	Register,
+};

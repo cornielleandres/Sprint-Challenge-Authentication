@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
 // Components
-import { Header } from './components/index.js';
+import {
+	Header,
+	Home,
+	Register,
+} from './components/index.js';
 
 // Styles
 import styled from 'styled-components';
@@ -17,6 +21,10 @@ class App extends Component {
 		return (
 			<AppDiv className = 'App'>
 				<Header />
+
+				<Route exact path = '/' component = { Home} />
+
+				<Route path = '/register' component = { Register } />
 			</AppDiv>
 		);
 	}
