@@ -33,7 +33,11 @@ class App extends Component {
 	};
 
 	setUserAndToken = (username, token) => {
-		localStorage.setItem('dadJokes', JSON.stringify(token));
+		const userInfo = {
+			username: username,
+			token: token,
+		};
+		localStorage.setItem('dadJokes', JSON.stringify(userInfo));
 		return this.setState({ username: username });
 	};
 
