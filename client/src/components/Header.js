@@ -45,6 +45,7 @@ const Header = () => {
 			<div className = 'links'>
 				<NavLink activeClassName = 'selected' exact to = '/'>Home</NavLink>
 				<NavLink activeClassName = 'selected' to = '/register'>Register</NavLink>
+				<NavLink activeClassName = 'selected' to = '/login'>Log In</NavLink>
 			</div>
 		</HeaderElem>
 	);

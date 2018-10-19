@@ -6,6 +6,7 @@ import {
 	Header,
 	Home,
 	Register,
+	Login,
 } from './components/index.js';
 
 // Styles
@@ -25,6 +26,8 @@ class App extends Component {
 				<Route exact path = '/' component = { Home} />
 
 				<Route path = '/register' component = { Register } />
+
+				<Route path = '/login' component = { Login } />
 			</AppDiv>
 		);
 	}
