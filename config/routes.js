@@ -30,7 +30,7 @@ function register(req, res) {
       }
       credentials.password = hash;
       return userDb
-        .register(credentials)
+        .insertNewUser(credentials)
         .then(id => {
           const user = {
             id: id,
@@ -42,12 +42,39 @@ function register(req, res) {
             token: token,
           });
         })
-        .catch(err => res.status(500).json({ error: `Server failed to register new user: ${ err }` }));
+        .catch(err => res.status(500).json({ error: `Server failed to insert new user: ${ err }` }));
     });
 }
 
 function login(req, res) {
-  // implement user login
+  const credentials = req.body;
+	if (!credentials.username) {
+		return res.status(401).json({ error: 'Username must not be empty.' });
+	}
+	if (!credentials.password) {
+		return res.status(401).json({ error: 'Password must not be empty.' });
+  }
+  return userDb
+    .getUser(credentials.username)
+    .then(user => {
+      return bcrypt
+        .compare(credentials.password, user.password)
+        .then((match) => {
+          if (match) {
+            const loggedInUser = {
+              id: user.id,
+              username: user.username,
+            };
+            const token = generateNewToken(loggedInUser);
+            return res.status(201).json({
+              ...loggedInUser,
+              token: token,
+            });
+          }
+          return res.status(401).json({ error: 'You shall not pass!' });
+        })
+    })
+    .catch(err => res.status(500).json({ error: `Server failed to get user: ${ err }`}));
 }
 
 function getJokes(req, res) {
