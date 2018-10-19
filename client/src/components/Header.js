@@ -55,7 +55,7 @@ const Header = props => {
 	} = props;
 	return(
 		<HeaderElem>
-			<h1>Welcome to Dad Jokes!</h1>
+			<h1>Dad Jokes Emporium!</h1>
 			
 			<div className = 'links'>
 				<NavLink activeClassName = 'selected' exact to = '/'>Home</NavLink>

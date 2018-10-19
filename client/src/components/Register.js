@@ -4,31 +4,42 @@ import axios from 'axios';
 // Styles
 import styled from 'styled-components';
 
-const RegisterForm = styled.form`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	flex-direction: column;
+const RegisterDiv = styled.div`
+	padding: 20px;
+	p {
+		text-align: center;
 
-	label {
-		color: white;
+		.user {
+			color: lime;
+		}
 	}
 
-	input {
-		margin-bottom: 20px;
-		border-radius: 5px;
-		padding: 5px 10px;
-	}
+	form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		flex-direction: column;
 
-	button {
-		border-radius: 5px;
-		padding: 5px 10px;
-
-		&:hover {
-			background-color: black;
+		label {
 			color: white;
-			cursor: pointer;
+		}
+
+		input {
+			margin-bottom: 20px;
+			border-radius: 5px;
+			padding: 5px 10px;
+		}
+
+		button {
+			border-radius: 5px;
+			padding: 5px 10px;
+
+			&:hover {
+				background-color: black;
+				color: white;
+				cursor: pointer;
+			}
 		}
 	}
 `;
@@ -66,16 +77,16 @@ export default class Register extends Component {
 			loggedInUser,
 		} = this.props;
 		return(
-			<Fragment>
+			<RegisterDiv>
 				{
 					loggedInUser
 					?
 					<Fragment>
-						<p>You are already logged in as { loggedInUser }.</p>
+						<p>You are already logged in as <span className = 'user'>{ loggedInUser }</span>.</p>
 						<p>Log out first if you want to register a new account.</p>
 					</Fragment>
 					:
-					<RegisterForm onSubmit = { this.handleSubmit }>
+					<form onSubmit = { this.handleSubmit }>
 						<label htmlFor = 'username'>Username:</label>
 						<input
 							name = 'username'
@@ -94,9 +105,9 @@ export default class Register extends Component {
 						/>
 
 						<button type = 'submit'>Register</button>
-					</RegisterForm>
+					</form>
 				}
-			</Fragment>
+			</RegisterDiv>
 		);
 	}
 };

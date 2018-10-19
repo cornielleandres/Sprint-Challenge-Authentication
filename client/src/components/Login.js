@@ -4,31 +4,43 @@ import axios from 'axios';
 // Styles
 import styled from 'styled-components';
 
-const LoginForm = styled.form`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
-	flex-direction: column;
+const LoginDiv = styled.div`
+	padding: 20px;
 
-	label {
-		color: white;
+	p {
+		text-align: center;
+
+		.user {
+			color: lime;
+		}
 	}
 
-	input {
-		margin-bottom: 20px;
-		border-radius: 5px;
-		padding: 5px 10px;
-	}
+	form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		flex-direction: column;
 
-	button {
-		border-radius: 5px;
-		padding: 5px 10px;
-
-		&:hover {
-			background-color: black;
+		label {
 			color: white;
-			cursor: pointer;
+		}
+
+		input {
+			margin-bottom: 20px;
+			border-radius: 5px;
+			padding: 5px 10px;
+		}
+
+		button {
+			border-radius: 5px;
+			padding: 5px 10px;
+
+			&:hover {
+				background-color: black;
+				color: white;
+				cursor: pointer;
+			}
 		}
 	}
 `;
@@ -64,16 +76,16 @@ export default class Login extends Component {
 		} = this.state;
 		const { loggedInUser } = this.props;
 		return(
-			<Fragment>
+			<LoginDiv>
 				{
 					loggedInUser
 					?
 					<Fragment>
-						<p>You are already logged in as { loggedInUser }.</p>
-						<p>Log out first if you want to log in again.</p>
+						<p>You are already logged in as <span className = 'user'>{ loggedInUser }</span>.</p>
+						<p>Log out first if you want to log in on another account.</p>
 					</Fragment>
 					:
-					<LoginForm onSubmit = { this.handleSubmit }>
+					<form onSubmit = { this.handleSubmit }>
 						<label htmlFor = 'username'>Username:</label>
 						<input
 							name = 'username'
@@ -92,9 +104,9 @@ export default class Login extends Component {
 						/>
 
 						<button type = 'submit'>Log In</button>
-					</LoginForm>
+					</form>
 				}
-			</Fragment>
+			</LoginDiv>
 		);
 	}
 };

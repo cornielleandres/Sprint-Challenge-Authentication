@@ -16,12 +16,12 @@ import styled from 'styled-components';
 const AppDiv = styled.div`
 	background-color: #282c34;
 	min-height: 100vh;
+	color: white;
 `;
 
 class App extends Component {
 	state = {
 		username: '',
-		token: '',
 	};
 
 	componentDidMount() {
@@ -33,12 +33,8 @@ class App extends Component {
 	};
 
 	setUserAndToken = (username, token) => {
-		const userInfo = {
-			username: username,
-			token: token,
-		};
-		localStorage.setItem('dadJokes', JSON.stringify(userInfo));
-		return this.setState({ ...userInfo });
+		localStorage.setItem('dadJokes', JSON.stringify(token));
+		return this.setState({ username: username });
 	};
 
 	goTo = path => this.props.history.push(path);
@@ -47,14 +43,12 @@ class App extends Component {
 		localStorage.removeItem('dadJokes');
 		return this.setState({
 			username: '',
-			token: '',
 		}, () => this.goTo('/'));
 	};
 
 	render() {
 		const {
 			username,
-			token,
 		} = this.state;
 		return (
 			<AppDiv className = 'App'>
@@ -66,7 +60,7 @@ class App extends Component {
 
 				<Route path = '/login' render = { () => <Login loggedInUser = { username } goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
 
-				<Route path = '/jokes' render = { () => <Jokes username = { username } token = { token } /> } />
+				<Route path = '/jokes' render = { () => <Jokes goTo = { this.goTo } logOut = { this.logOut } username = { username } /> } />
 			</AppDiv>
 		);
 	}
