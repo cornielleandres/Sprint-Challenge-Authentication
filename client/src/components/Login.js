@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 // Styles
@@ -62,27 +62,39 @@ export default class Login extends Component {
 			username,
 			password,
 		} = this.state;
+		const { loggedInUser } = this.props;
 		return(
-			<LoginForm onSubmit = { this.handleSubmit }>
-				<label htmlFor = 'username'>Username:</label>
-				<input
-					name = 'username'
-					id = 'username'
-					value = { username }
-					onChange = { this.handleInputChange }
-				/>
+			<Fragment>
+				{
+					loggedInUser
+					?
+					<Fragment>
+						<p>You are already logged in as { loggedInUser }.</p>
+						<p>Log out first if you want to log in again.</p>
+					</Fragment>
+					:
+					<LoginForm onSubmit = { this.handleSubmit }>
+						<label htmlFor = 'username'>Username:</label>
+						<input
+							name = 'username'
+							id = 'username'
+							value = { username }
+							onChange = { this.handleInputChange }
+						/>
 
-				<label htmlFor = 'password'>Password:</label>
-				<input
-					type = 'password'
-					name = 'password'
-					id = 'password'
-					value = { password }
-					onChange = { this.handleInputChange }
-				/>
+						<label htmlFor = 'password'>Password:</label>
+						<input
+							type = 'password'
+							name = 'password'
+							id = 'password'
+							value = { password }
+							onChange = { this.handleInputChange }
+						/>
 
-				<button type = 'submit'>Log In</button>
-			</LoginForm>
+						<button type = 'submit'>Log In</button>
+					</LoginForm>
+				}
+			</Fragment>
 		);
 	}
 };

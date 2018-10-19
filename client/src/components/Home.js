@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const Home = () => {
+const Home = props => {
+	const { username } = props;
 	return(
 		<div>
-			Home
+			{
+				username
+				?
+				<Fragment>
+					<h2>Welcome back to Dad Jokes, { username }!</h2>
+				</Fragment>
+				:
+				<Fragment>
+					<p>Welcome to Dad Jokes, please log in to view jokes.</p>
+				</Fragment>
+			}
 		</div>
 	);
 };

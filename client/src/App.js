@@ -60,11 +60,11 @@ class App extends Component {
 			<AppDiv className = 'App'>
 				<Header username = { username } logOut = { this.logOut } />
 
-				<Route exact path = '/' component = { Home} />
+				<Route exact path = '/' render = { () => <Home username = { username } /> } />
 
-				<Route path = '/register' render = { () => <Register goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
+				<Route path = '/register' render = { () => <Register loggedInUser = { username } goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
 
-				<Route path = '/login' render = { () => <Login goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
+				<Route path = '/login' render = { () => <Login loggedInUser = { username } goTo = { this.goTo } setUserAndToken = { this.setUserAndToken } /> } />
 
 				<Route path = '/jokes' render = { () => <Jokes username = { username } token = { token } /> } />
 			</AppDiv>

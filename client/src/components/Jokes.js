@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 // Components
@@ -22,9 +22,17 @@ export default class Jokes extends Component {
 		const { jokes } = this.state;
 		return(
 			<div>
-				<h2>Welcome back, {username}!</h2>
-				<p>Here are your jokes:</p>
-				{ jokes.map((joke, i) => <Joke key = { i } joke = { joke } />) }
+				{
+					username
+					?
+					<Fragment>
+						<h2>Welcome back, {username}!</h2>
+						<p>Here are your jokes:</p>
+						{ jokes.map((joke, i) => <Joke key = { i } joke = { joke } />) }
+					</Fragment>
+					:
+					<div>Please log in first to view jokes.</div>
+				}
 			</div>
 		);
 	}

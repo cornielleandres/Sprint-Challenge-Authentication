@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 // Styles
@@ -62,27 +62,41 @@ export default class Register extends Component {
 			username,
 			password,
 		} = this.state;
+		const {
+			loggedInUser,
+		} = this.props;
 		return(
-			<RegisterForm onSubmit = { this.handleSubmit }>
-				<label htmlFor = 'username'>Username:</label>
-				<input
-					name = 'username'
-					id = 'username'
-					value = { username }
-					onChange = { this.handleInputChange }
-				/>
+			<Fragment>
+				{
+					loggedInUser
+					?
+					<Fragment>
+						<p>You are already logged in as { loggedInUser }.</p>
+						<p>Log out first if you want to register a new account.</p>
+					</Fragment>
+					:
+					<RegisterForm onSubmit = { this.handleSubmit }>
+						<label htmlFor = 'username'>Username:</label>
+						<input
+							name = 'username'
+							id = 'username'
+							value = { username }
+							onChange = { this.handleInputChange }
+						/>
 
-				<label htmlFor = 'password'>Password:</label>
-				<input
-					type = 'password'
-					name = 'password'
-					id = 'password'
-					value = { password }
-					onChange = { this.handleInputChange }
-				/>
+						<label htmlFor = 'password'>Password:</label>
+						<input
+							type = 'password'
+							name = 'password'
+							id = 'password'
+							value = { password }
+							onChange = { this.handleInputChange }
+						/>
 
-				<button type = 'submit'>Register</button>
-			</RegisterForm>
+						<button type = 'submit'>Register</button>
+					</RegisterForm>
+				}
+			</Fragment>
 		);
 	}
 };
