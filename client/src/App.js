@@ -18,6 +18,14 @@ const AppDiv = styled.div`
 `;
 
 class App extends Component {
+	state = {
+		token: '',
+	};
+
+	setToken = token => {
+		return this.setState({ token: token });
+	};
+
 	render() {
 		return (
 			<AppDiv className = 'App'>
@@ -25,9 +33,9 @@ class App extends Component {
 
 				<Route exact path = '/' component = { Home} />
 
-				<Route path = '/register' component = { Register } />
+				<Route path = '/register' render = { () => <Register setToken = { this.setToken } /> } />
 
-				<Route path = '/login' component = { Login } />
+				<Route path = '/login' render = { () => <Login setToken = { this.setToken } /> } />
 			</AppDiv>
 		);
 	}

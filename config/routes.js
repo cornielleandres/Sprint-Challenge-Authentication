@@ -33,12 +33,11 @@ function register(req, res) {
         .insertNewUser(credentials)
         .then(id => {
           const user = {
-            id: id,
             username: credentials.username,
           };
           const token = generateNewToken(user);
           return res.status(201).json({
-            newUser: credentials.username,
+            username: credentials.username,
             token: token,
           });
         })
@@ -62,12 +61,11 @@ function login(req, res) {
         .then((match) => {
           if (match) {
             const loggedInUser = {
-              id: user.id,
-              username: user.username,
+              username: credentials.username,
             };
             const token = generateNewToken(loggedInUser);
             return res.status(201).json({
-              ...loggedInUser,
+              username: user.username,
               token: token,
             });
           }
