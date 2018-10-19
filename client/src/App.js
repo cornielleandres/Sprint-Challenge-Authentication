@@ -24,6 +24,14 @@ class App extends Component {
 		token: '',
 	};
 
+	componentDidMount() {
+		const userInfo = JSON.parse(localStorage.getItem('dadJokes'));
+		if (userInfo) {
+			return this.setState({ ...userInfo }, () => this.goTo('/'));
+		}
+		return this.goTo('/');
+	};
+
 	setUserAndToken = (username, token) => {
 		const userInfo = {
 			username: username,
@@ -35,6 +43,14 @@ class App extends Component {
 
 	goTo = path => this.props.history.push(path);
 
+	logOut = () => {
+		localStorage.removeItem('dadJokes');
+		return this.setState({
+			username: '',
+			token: '',
+		}, () => this.goTo('/'));
+	};
+
 	render() {
 		const {
 			username,
@@ -42,7 +58,7 @@ class App extends Component {
 		} = this.state;
 		return (
 			<AppDiv className = 'App'>
-				<Header />
+				<Header username = { username } logOut = { this.logOut } />
 
 				<Route exact path = '/' component = { Home} />
 

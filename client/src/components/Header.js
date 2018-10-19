@@ -35,9 +35,24 @@ const HeaderElem = styled.header`
 			background-color: black;
 		}
 	}
+
+	.logout-btn {
+		border-radius:5px;
+		padding: 5px 10px;
+
+		&:hover {
+			background-color: black;
+			color: white;
+			cursor: pointer;
+		}
+	}
 `;
 
-const Header = () => {
+const Header = props => {
+	const {
+		username,
+		logOut,
+	} = props;
 	return(
 		<HeaderElem>
 			<h1>Welcome to Dad Jokes!</h1>
@@ -48,6 +63,8 @@ const Header = () => {
 				<NavLink activeClassName = 'selected' to = '/login'>Log In</NavLink>
 				<NavLink activeClassName = 'selected' to = '/jokes'>Jokes</NavLink>
 			</div>
+
+			{ username && <button className = 'logout-btn' onClick = { logOut }>Log Out</button> }
 		</HeaderElem>
 	);
 };
